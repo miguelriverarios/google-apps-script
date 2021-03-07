@@ -1,4 +1,4 @@
-public with sharing class MRR_GoogleAppsScriptModelMetricsValue {
+public with sharing class MRR_GoogleAppsScriptModelMetrics {
   // Instance Variables
   private MetricsValue[] activeUsers; // Number of active users
   private MetricsValue[] totalExecutions; // Number of total executions

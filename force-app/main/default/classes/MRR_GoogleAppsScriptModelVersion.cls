@@ -28,7 +28,7 @@ public with sharing class MRR_GoogleAppsScriptModelVersion extends MRR_GoogleApp
   public String getDescription() {
     return description;
   }
-  public mrr_GoogleAppsScriptModelProject setDescription(String description) {
+  public mrr_GoogleAppsScriptModelVersion setDescription(String description) {
     this.description = description;
     return this;
   }
@@ -36,7 +36,7 @@ public with sharing class MRR_GoogleAppsScriptModelVersion extends MRR_GoogleApp
   public String getCreateTime() {
     return createTime;
   }
-  public mrr_GoogleAppsScriptModelProject setCreateTime(String createTime) {
+  public mrr_GoogleAppsScriptModelVersion setCreateTime(String createTime) {
     this.createTime = createTime;
     return this;
   }

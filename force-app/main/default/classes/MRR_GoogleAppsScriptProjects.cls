@@ -89,9 +89,11 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
    */
   public UpdateContentRequest updateContent(
     String scriptId,
-    UpdateContentFiles scriptContents
+    Blob scriptContents
   ) {
-    return new UpdateContentRequest(this, scriptId, scriptContents);
+    ffhttp_BlobContent br = new ffhttp_BlobContent(scriptContents, null);
+
+    return new UpdateContentRequest(this, scriptId, br);
   }
 
   /*********************************************************************************************************
@@ -115,9 +117,9 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
   }
 
   public class GetRequest extends GoogleAppsScriptRequest {
-    GetRequest(MRR_GoogleAppsScriptProcesses processes, String scriptId) {
+    GetRequest(MRR_GoogleAppsScriptProjects projects, String scriptId) {
       super(
-        processes,
+        projects,
         MAIN_ENDPOINT,
         ENDPOINT_PROJECTS + scriptId,
         REQUEST_METHOD_GET,
@@ -128,12 +130,9 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
   }
 
   public class GetContentRequest extends GoogleAppsScriptRequest {
-    GetContentRequest(
-      MRR_GoogleAppsScriptProcesses processes,
-      String scriptId
-    ) {
+    GetContentRequest(MRR_GoogleAppsScriptProjects projects, String scriptId) {
       super(
-        processes,
+        projects,
         MAIN_ENDPOINT,
         ENDPOINT_PROJECTS +
         scriptId +
@@ -148,7 +147,7 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
     /**
      * Request parameters
      */
-    public Integer getVersionNumber() {
+    public Boolean getVersionNumber() {
       return getParam('versionNumber', false);
     }
     public GetContentRequest setVersionNumber(Integer versionNumber) {
@@ -158,12 +157,9 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
   }
 
   public class GetMetricsRequest extends GoogleAppsScriptRequest {
-    GetMetricsRequest(
-      MRR_GoogleAppsScriptProcesses processes,
-      String scriptId
-    ) {
+    GetMetricsRequest(MRR_GoogleAppsScriptProjects projects, String scriptId) {
       super(
-        processes,
+        projects,
         MAIN_ENDPOINT,
         ENDPOINT_PROJECTS +
         scriptId +
@@ -178,7 +174,7 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
     /**
      * Request parameters
      */
-    public MetricsGranularity getMetricsGranularity() {
+    public Boolean getMetricsGranularity() {
       return getParam('metricsGranularity', false);
     }
     public GetMetricsRequest setMetricsGranularity(
@@ -188,46 +184,23 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
       return this;
     }
 
-    public MetricsFilter getMetricsFilter() {
+    public Boolean getMetricsFilter() {
       return getParam('metricsFilter', false);
     }
     public GetMetricsRequest setMetricsFilter(MetricsFilter metricsFilter) {
       addParam('metricsFilter', metricsFilter);
       return this;
     }
-
-    public class MetricsFilter {
-      // Instance Variables
-      private String deploymentId; // Optional field indicating a specific deployment to retrieve metrics from
-
-      /**
-       * Get/Sets
-       */
-      public String getDeploymentId() {
-        return deploymentId;
-      }
-      public MetricsFilter setDeploymentId(String deploymentId) {
-        this.deploymentId = deploymentId;
-        return this;
-      }
-    }
-
-    // Enums
-    public enum MetricsGranularity {
-      UNSPECIFIED_GRANULARITY, // Default metric granularity used to query no metrics
-      WEEKLY, // Represents weekly metrics
-      DAILY // Represents daily metrics over a period of 7 days
-    }
   }
 
   public class UpdateContentRequest extends GoogleAppsScriptRequest {
     UpdateContentRequest(
-      MRR_GoogleAppsScriptProcesses processes,
+      MRR_GoogleAppsScriptProjects projects,
       String scriptId,
-      UpdateContentFiles scriptContents
+      ffhttp_IHttpContent scriptContents
     ) {
       super(
-        processes,
+        projects,
         MAIN_ENDPOINT,
         ENDPOINT_PROJECTS +
         scriptId +
@@ -259,5 +232,28 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
       this.files = files;
       return this;
     }
+  }
+
+  public class MetricsFilter {
+    // Instance Variables
+    private String deploymentId; // Optional field indicating a specific deployment to retrieve metrics from
+
+    /**
+     * Get/Sets
+     */
+    public String getDeploymentId() {
+      return deploymentId;
+    }
+    public MetricsFilter setDeploymentId(String deploymentId) {
+      this.deploymentId = deploymentId;
+      return this;
+    }
+  }
+
+  // Enums
+  public enum MetricsGranularity {
+    UNSPECIFIED_GRANULARITY, // Default metric granularity used to query no metrics
+    WEEKLY, // Represents weekly metrics
+    DAILY // Represents daily metrics over a period of 7 days
   }
 }

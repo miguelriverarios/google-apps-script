@@ -1,4 +1,4 @@
-public inherited sharing class MRR_GoogleAppsScriptModelDeployment extends MRR_GoogleAppsScriptModelAbstractObject {
+public with sharing class MRR_GoogleAppsScriptModelDeployment extends MRR_GoogleAppsScriptModelAbstractObject {
   // Instance Variables
   private String deploymentId; // The deployment ID for this deployment
   private DeploymentConfig deploymentConfig; // The deployment configuration
@@ -6,7 +6,7 @@ public inherited sharing class MRR_GoogleAppsScriptModelDeployment extends MRR_G
   // "Zulu" format, with nanosecond resolution and up to nine fractional digits)
   private EntryPoint[] entryPoints; //The deployment's entry points
 
-  public with sharing class DeploymentConfig extends ffhttp_AbstractJsonSerializable {
+  public class DeploymentConfig extends ffhttp_AbstractJsonSerializable {
     // Instance Variables
     private String scriptId; // The script project's Drive ID
     private Long versionNumber; // The version number on which this deployment is based
@@ -55,41 +55,6 @@ public inherited sharing class MRR_GoogleAppsScriptModelDeployment extends MRR_G
     private WebAppEntryPoint webApp; // An entry point specification for web apps
     private ExecutionApiEntryPoint executionApi; // An entry point specification for Apps Script API execution calls
     private AddOnEntryPoint addOn; // Add-on properties
-
-    /**
-     * Get/Sets
-     */
-    public String getScriptId() {
-      return scriptId;
-    }
-    public DeploymentConfig setScriptId(String scriptId) {
-      this.scriptId = scriptId;
-      return this;
-    }
-
-    public Long getVersionNumber() {
-      return versionNumber;
-    }
-    public DeploymentConfig setVersionNumber(Long versionNumber) {
-      this.versionNumber = versionNumber;
-      return this;
-    }
-
-    public String getManifestFileName() {
-      return manifestFileName;
-    }
-    public DeploymentConfig setManifestFileName(String manifestFileName) {
-      this.manifestFileName = manifestFileName;
-      return this;
-    }
-
-    public String getDescription() {
-      return description;
-    }
-    public DeploymentConfig setDescription(String description) {
-      this.description = description;
-      return this;
-    }
   }
 
   public class WebAppEntryPoint extends ffhttp_AbstractJsonSerializable {
@@ -130,7 +95,7 @@ public inherited sharing class MRR_GoogleAppsScriptModelDeployment extends MRR_G
     }
     public WebAppConfig setAccess(Access access) {
       this.access = access;
-      return access;
+      return this;
     }
 
     public ExecuteAs getExecuteAs() {
@@ -138,7 +103,7 @@ public inherited sharing class MRR_GoogleAppsScriptModelDeployment extends MRR_G
     }
     public WebAppConfig setExecuteAs(ExecuteAs executeAs) {
       this.executeAs = executeAs;
-      return executeAs;
+      return this;
     }
   }
 
@@ -152,7 +117,7 @@ public inherited sharing class MRR_GoogleAppsScriptModelDeployment extends MRR_G
     public ExecutionApiConfig getEntryPointConfig() {
       return entryPointConfig;
     }
-    public ExecutionApiConfig setEntryPointConfig(
+    public ExecutionApiEntryPoint setEntryPointConfig(
       ExecutionApiConfig entryPointConfig
     ) {
       this.entryPointConfig = entryPointConfig;
@@ -170,9 +135,9 @@ public inherited sharing class MRR_GoogleAppsScriptModelDeployment extends MRR_G
     public Access getAccess() {
       return access;
     }
-    public WebAppConfig setAccess(Access access) {
+    public ExecutionApiConfig setAccess(Access access) {
       this.access = access;
-      return access;
+      return this;
     }
   }
 

@@ -60,7 +60,7 @@ public with sharing class MRR_GoogleAppsScriptProcesses extends MRR_GoogleAppsSc
     /**
      * Request parameters
      */
-    public Integer getPageSize() {
+    public Boolean getPageSize() {
       return getParam('pageSize', false);
     }
     public ListRequest setPageSize(Integer pageSize) {
@@ -68,7 +68,7 @@ public with sharing class MRR_GoogleAppsScriptProcesses extends MRR_GoogleAppsSc
       return this;
     }
 
-    public String getPageToken() {
+    public Boolean getPageToken() {
       return getParam('pageToken', false);
     }
     public ListRequest setPageToken(String pageToken) {
@@ -92,7 +92,7 @@ public with sharing class MRR_GoogleAppsScriptProcesses extends MRR_GoogleAppsSc
     /**
      * Request parameters
      */
-    public Integer getScriptId() {
+    public Boolean getScriptId() {
       return getParam('scriptId', false);
     }
     public ListScriptProcessesRequest setScriptId(String scriptId) {
@@ -100,7 +100,7 @@ public with sharing class MRR_GoogleAppsScriptProcesses extends MRR_GoogleAppsSc
       return this;
     }
 
-    public Integer getPageSize() {
+    public Boolean getPageSize() {
       return getParam('pageSize', false);
     }
     public ListScriptProcessesRequest setPageSize(Integer pageSize) {
@@ -108,7 +108,7 @@ public with sharing class MRR_GoogleAppsScriptProcesses extends MRR_GoogleAppsSc
       return this;
     }
 
-    public String getPageToken() {
+    public Boolean getPageToken() {
       return getParam('pageToken', false);
     }
     public ListScriptProcessesRequest setPageToken(String pageToken) {

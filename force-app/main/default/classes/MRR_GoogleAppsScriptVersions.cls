@@ -94,7 +94,7 @@ public with sharing class MRR_GoogleAppsScriptVersions extends MRR_GoogleAppsScr
       Integer versionNumber
     ) {
       super(
-        deployments,
+        versions,
         MAIN_ENDPOINT,
         ENDPOINT_PROJECTS +
         scriptId +
@@ -109,9 +109,9 @@ public with sharing class MRR_GoogleAppsScriptVersions extends MRR_GoogleAppsScr
   }
 
   public class ListRequest extends GoogleAppsScriptRequest {
-    ListRequest(MRR_GoogleAppsScriptDeployments versions, String scriptId) {
+    ListRequest(MRR_GoogleAppsScriptVersions versions, String scriptId) {
       super(
-        deployments,
+        versions,
         MAIN_ENDPOINT,
         ENDPOINT_PROJECTS +
         scriptId +
@@ -126,7 +126,7 @@ public with sharing class MRR_GoogleAppsScriptVersions extends MRR_GoogleAppsScr
     /**
      * Request parameters
      */
-    public Integer getPageSize() {
+    public Boolean getPageSize() {
       return getParam('pageSize', false);
     }
     public ListRequest setPageSize(Integer pageSize) {
@@ -134,7 +134,7 @@ public with sharing class MRR_GoogleAppsScriptVersions extends MRR_GoogleAppsScr
       return this;
     }
 
-    public String getPageToken() {
+    public Boolean getPageToken() {
       return getParam('pageToken', false);
     }
     public ListRequest setPageToken(String pageToken) {

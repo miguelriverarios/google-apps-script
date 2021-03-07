@@ -45,7 +45,7 @@ public with sharing class MRR_GoogleAppsScriptDeployments extends MRR_GoogleApps
    * @return the request
    */
   public DeleteRequest deleteRequest(String scriptId, String deploymentId) {
-    return new CreateRequest(this, scriptId, deploymentId);
+    return new DeleteRequest(this, scriptId, deploymentId);
   }
 
   /**
@@ -184,7 +184,7 @@ public with sharing class MRR_GoogleAppsScriptDeployments extends MRR_GoogleApps
     /**
      * Request parameters
      */
-    public Integer getPageSize() {
+    public Boolean getPageSize() {
       return getParam('pageSize', false);
     }
     public ListRequest setPageSize(Integer pageSize) {
@@ -192,7 +192,7 @@ public with sharing class MRR_GoogleAppsScriptDeployments extends MRR_GoogleApps
       return this;
     }
 
-    public String getPageToken() {
+    public Boolean getPageToken() {
       return getParam('pageToken', false);
     }
     public ListRequest setPageToken(String pageToken) {

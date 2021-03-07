@@ -1,4 +1,4 @@
-public with sharing class MRR_GoogleAppsScriptResource {
+public abstract class MRR_GoogleAppsScriptResource {
   // OAuth Scopes
   public static final String SCOPE_PROCESSES = 'https://www.googleapis.com/auth/script.processes';
   public static final String SCOPE_PROJECTS = 'https://www.googleapis.com/auth/script.projects';
