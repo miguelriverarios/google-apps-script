@@ -8,6 +8,67 @@ public with sharing class MRR_GoogleAppsScriptModelFile extends ffhttp_AbstractJ
   private String updateTime; // Last modified date timestamp. This read-only field is only visible to users who have WRITER permission for the script project. A timestamp in RFC3339 UTC "Zulu" format, with nanosecond resolution and up to nine fractional digits.
   private FunctionSet functionSet; // The defined set of functions in the script file, if any.
 
+  /**
+   * Get/Sets
+   */
+  public String getName() {
+    return name;
+  }
+  public MRR_GoogleAppsScriptModelFile setName(String name) {
+    this.name = name;
+    return this;
+  }
+
+  public FileType getType() {
+    return type;
+  }
+  public MRR_GoogleAppsScriptModelFile setType(FileType type) {
+    this.type = type;
+    return this;
+  }
+
+  public String getSource() {
+    return source;
+  }
+  public MRR_GoogleAppsScriptModelFile setSource(String source) {
+    this.source = source;
+    return this;
+  }
+
+  public MRR_GoogleAppsScriptModelUser getLastModifyUser() {
+    return lastModifyUser;
+  }
+  public MRR_GoogleAppsScriptModelFile setLastModifyUser(
+    MRR_GoogleAppsScriptModelUser lastModifyUser
+  ) {
+    this.lastModifyUser = lastModifyUser;
+    return this;
+  }
+
+  public String getCreateTime() {
+    return createTime;
+  }
+  public MRR_GoogleAppsScriptModelFile setCreateTime(String createTime) {
+    this.createTime = createTime;
+    return this;
+  }
+
+  public String getUpdateTime() {
+    return updateTime;
+  }
+  public MRR_GoogleAppsScriptModelFile setUpdateTime(String updateTime) {
+    this.updateTime = updateTime;
+    return this;
+  }
+
+  public FunctionSet getFunctionSet() {
+    return functionSet;
+  }
+  public MRR_GoogleAppsScriptModelFile setFunctionSet(FunctionSet functionSet) {
+    this.functionSet = functionSet;
+    return this;
+  }
+
   public class FunctionSet {
     // Instance Variables
     private Function[] values; // A list of functions composing the set.

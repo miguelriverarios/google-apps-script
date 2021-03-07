@@ -349,4 +349,63 @@ private class MRR_GoogleAppsScriptModelTest {
       'Create time does not match'
     );
   }
+  static testMethod void mrr_GoogleAppsScriptModelFile() {
+    //Create all the required sub-classes
+    MRR_GoogleAppsScriptModelFile.Function function = new MRR_GoogleAppsScriptModelFile.Function();
+    function.setName('Test');
+    MRR_GoogleAppsScriptModelFile.Function[] functions = new List<MRR_GoogleAppsScriptModelFile.Function>();
+    functions.add(function);
+    MRR_GoogleAppsScriptModelFile.FunctionSet functionSet = new MRR_GoogleAppsScriptModelFile.FunctionSet();
+    functionSet.setValues(functions);
+    MRR_GoogleAppsScriptModelUser user = new MRR_GoogleAppsScriptModelUser();
+    user.setDomain('Test')
+      .setEmail('test@gmail.com')
+      .setName('Test')
+      .setPhotoUrl('www.test.com');
+
+    //Create the file class. Chain the set calls so that we can check that we correctly return the file object.
+    MRR_GoogleAppsScriptModelFile file = new MRR_GoogleAppsScriptModelFile();
+    file.setName('Test')
+      .setType(MRR_GoogleAppsScriptModelFile.FileType.HTML)
+      .setSource('Test')
+      .setLastModifyUser(user)
+      .setCreateTime('2019-10-12T07:20:50.52Z')
+      .setUpdateTime('2019-10-12T07:20:50.52Z')
+      .setFunctionSet(functionSet);
+
+    //Assert that we get the appropriate return values.
+    System.assertEquals(file.getName(), 'Test', 'Name does not match');
+    System.assertEquals(
+      file.getType(),
+      MRR_GoogleAppsScriptModelFile.FileType.HTML,
+      'Type does not match'
+    );
+    System.assertEquals(file.getSource(), 'Test', 'Source does not match');
+    System.assertEquals(
+      file.getLastModifyUser(),
+      user,
+      'Last modify user does not match'
+    );
+    System.assertEquals(
+      file.getCreateTime(),
+      '2019-10-12T07:20:50.52Z',
+      'Create time does not match'
+    );
+    System.assertEquals(
+      file.getUpdateTime(),
+      '2019-10-12T07:20:50.52Z',
+      'Update time does not match'
+    );
+    System.assertEquals(
+      file.getFunctionSet(),
+      functionSet,
+      'Function set does not match'
+    );
+    System.assertEquals(
+      functionSet.getValues(),
+      functions,
+      'Functions do not match'
+    );
+    System.assertEquals(function.getName(), 'Test', 'Name does not match');
+  }
 }
