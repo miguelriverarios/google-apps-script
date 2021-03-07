@@ -1,41 +1,47 @@
 @isTest
 private class MRR_GoogleAppsScriptModelTest {
-  static testMethod void mrr_GoogleDriveModelDeployment() {
+  static testMethod void mrr_GoogleAppsScriptModelDeployment() {
     //Create all the required sub-classes
-    MRR_GoogleDriveModelDeployment.DeploymentConfig deploymentConfig = new MRR_GoogleDriveModelDeployment.DeploymentConfig();
+    MRR_GoogleAppsScriptModelDeployment.DeploymentConfig deploymentConfig = new MRR_GoogleAppsScriptModelDeployment.DeploymentConfig();
     deploymentConfig.setScriptId('123ABC')
       .setVersionNumber(5)
       .setManifestFileName('Test')
       .setDescription('Test');
 
-    MRR_GoogleDriveModelDeployment.WebAppConfig webAppConfig = new MRR_GoogleDriveModelDeployment.WebAppConfig();
-    webAppConfig.setAccess(MRR_GoogleDriveModelDeployment.Access.MYSELF)
-      .setExecuteAs(MRR_GoogleDriveModelDeployment.ExecuteAs.USER_ACCESSING);
-    MRR_GoogleDriveModelDeployment.WebAppEntryPoint webAppEntryPoint = new MRR_GoogleDriveModelDeployment.WebAppEntryPoint();
+    MRR_GoogleAppsScriptModelDeployment.WebAppConfig webAppConfig = new MRR_GoogleAppsScriptModelDeployment.WebAppConfig();
+    webAppConfig.setAccess(MRR_GoogleAppsScriptModelDeployment.Access.MYSELF)
+      .setExecuteAs(
+        MRR_GoogleAppsScriptModelDeployment.ExecuteAs.USER_ACCESSING
+      );
+    MRR_GoogleAppsScriptModelDeployment.WebAppEntryPoint webAppEntryPoint = new MRR_GoogleAppsScriptModelDeployment.WebAppEntryPoint();
     webAppEntryPoint.setUrl('www.test.com').setEntryPointConfig(webAppConfig);
-    MRR_GoogleDriveModelDeployment.ExecutionApiConfig executionApiConfig = new MRR_GoogleDriveModelDeployment.ExecutionApiConfig();
-    executionApiConfig.setAccess(MRR_GoogleDriveModelDeployment.Access.MYSELF);
-    MRR_GoogleDriveModelDeployment.ExecutionApiEntryPoint executionApiEntryPoint = new MRR_GoogleDriveModelDeployment.ExecutionApiEntryPoint();
+    MRR_GoogleAppsScriptModelDeployment.ExecutionApiConfig executionApiConfig = new MRR_GoogleAppsScriptModelDeployment.ExecutionApiConfig();
+    executionApiConfig.setAccess(
+      MRR_GoogleAppsScriptModelDeployment.Access.MYSELF
+    );
+    MRR_GoogleAppsScriptModelDeployment.ExecutionApiEntryPoint executionApiEntryPoint = new MRR_GoogleAppsScriptModelDeployment.ExecutionApiEntryPoint();
     executionApiEntryPoint.setEntryPointConfig(executionApiConfig);
-    MRR_GoogleDriveModelDeployment.AddOnEntryPoint addOnEntryPoint = new MRR_GoogleDriveModelDeployment.AddOnEntryPoint();
-    addOnEntryPoint.setAddOnType(MRR_GoogleDriveModelDeployment.AddOnType.GMAIL)
+    MRR_GoogleAppsScriptModelDeployment.AddOnEntryPoint addOnEntryPoint = new MRR_GoogleAppsScriptModelDeployment.AddOnEntryPoint();
+    addOnEntryPoint.setAddOnType(
+        MRR_GoogleAppsScriptModelDeployment.AddOnType.GMAIL
+      )
       .setTitle('Test')
       .setDescription('Test')
       .setHelpUrl('www.test.com')
       .setReportIssueUrl('www.test.com')
       .setPostInstallTipUrl('www.test.com');
-    MRR_GoogleDriveModelDeployment.EntryPoint entryPoint = new MRR_GoogleDriveModelDeployment.EntryPoint();
+    MRR_GoogleAppsScriptModelDeployment.EntryPoint entryPoint = new MRR_GoogleAppsScriptModelDeployment.EntryPoint();
     entryPoint.setEntryPointType(
-        MRR_GoogleDriveModelDeployment.EntryPointType.WEB_APP
+        MRR_GoogleAppsScriptModelDeployment.EntryPointType.WEB_APP
       )
       .setWebApp(webAppEntryPoint)
       .setExecutionApi(executionApiEntryPoint)
       .setAddOn(addOnEntryPoint);
-    MRR_GoogleDriveModelDeployment.EntryPoint[] entryPoints = new List<MRR_GoogleDriveModelDeployment.EntryPoint>();
+    MRR_GoogleAppsScriptModelDeployment.EntryPoint[] entryPoints = new List<MRR_GoogleAppsScriptModelDeployment.EntryPoint>();
     entryPoints.add(entryPoint);
 
     //Create the file class. Chain the set calls so that we can check that we correctly return the file object.
-    MRR_GoogleDriveModelDeployment deployment = new MRR_GoogleDriveModelDeployment();
+    MRR_GoogleAppsScriptModelDeployment deployment = new MRR_GoogleAppsScriptModelDeployment();
     deployment.setDeploymentId('123ABC')
       .setDeploymentConfig(deploymentConfig)
       .setUpdateTime('2019-10-12T07:20:50.52Z')
@@ -64,7 +70,7 @@ private class MRR_GoogleAppsScriptModelTest {
     );
     System.assertEquals(
       entryPoint.getEntryPointType(),
-      MRR_GoogleDriveModelDeployment.EntryPointType.WEB_APP,
+      MRR_GoogleAppsScriptModelDeployment.EntryPointType.WEB_APP,
       'Entry point type does not match'
     );
     System.assertEquals(
@@ -84,7 +90,7 @@ private class MRR_GoogleAppsScriptModelTest {
     );
     System.assertEquals(
       addOnEntryPoint.getAddOnType(),
-      MRR_GoogleDriveModelDeployment.AddOnType.GMAIL,
+      MRR_GoogleAppsScriptModelDeployment.AddOnType.GMAIL,
       'Add on entry point type does not match'
     );
     System.assertEquals(
@@ -114,7 +120,7 @@ private class MRR_GoogleAppsScriptModelTest {
     );
     System.assertEquals(
       executionApiConfig.getAccess(),
-      MRR_GoogleDriveModelDeployment.Access.MYSELF,
+      MRR_GoogleAppsScriptModelDeployment.Access.MYSELF,
       'Execution api configuration access does not match'
     );
     System.assertEquals(
@@ -124,12 +130,12 @@ private class MRR_GoogleAppsScriptModelTest {
     );
     System.assertEquals(
       webAppConfig.getAccess(),
-      MRR_GoogleDriveModelDeployment.Access.MYSELF,
+      MRR_GoogleAppsScriptModelDeployment.Access.MYSELF,
       'Web app configuration access does not match'
     );
     System.assertEquals(
       webAppConfig.getExecuteAs(),
-      MRR_GoogleDriveModelDeployment.ExecuteAs.USER_ACCESSING,
+      MRR_GoogleAppsScriptModelDeployment.ExecuteAs.USER_ACCESSING,
       'Web app configuration execute as does not match'
     );
     System.assertEquals(
