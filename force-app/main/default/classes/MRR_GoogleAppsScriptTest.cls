@@ -416,6 +416,167 @@ private class MRR_GoogleAppsScriptTest {
   }
 
   /**
+   * MRR_GoogleAppsScriptDeployments tests
+   */
+  static testMethod void mrr_GoogleAppsScriptDeploymentsCreateRequest() {
+    MRR_GoogleAppsScriptModelDeployment.DeploymentConfig deploymentConfig = new MRR_GoogleAppsScriptModelDeployment.DeploymentConfig();
+    deploymentConfig.setVersionNumber(2)
+      .setManifestFileName('Test')
+      .setDescription('Test');
+
+    MRR_GoogleAppsScriptDeployments deployments = createGoogleAppsScriptDeployments();
+    MRR_GoogleAppsScriptDeployments.CreateRequest createRequest = deployments.createRequest(
+      '123ABC',
+      deploymentConfig
+    );
+    assertRequestEndpointAndMethod(
+      createRequest,
+      'https://script.googleapis.com/v1/projects/123ABC/deployments/',
+      'POST'
+    );
+  }
+  static testMethod void mrr_GoogleAppsScriptDeploymentsDeleteRequest() {
+    MRR_GoogleAppsScriptDeployments deployments = createGoogleAppsScriptDeployments();
+    MRR_GoogleAppsScriptDeployments.DeleteRequest deleteRequest = deployments.deleteRequest(
+      '123ABC',
+      'ABC123'
+    );
+    assertRequestEndpointAndMethod(
+      deleteRequest,
+      'https://script.googleapis.com/v1/projects/123ABC/deployments/ABC123',
+      'DELETE'
+    );
+  }
+  static testMethod void mrr_GoogleAppsScriptDeploymentsGetRequest() {
+    MRR_GoogleAppsScriptDeployments deployments = createGoogleAppsScriptDeployments();
+    MRR_GoogleAppsScriptDeployments.GetRequest getRequest = deployments.getRequest(
+      '123ABC',
+      'ABC123'
+    );
+    assertRequestEndpointAndMethod(
+      getRequest,
+      'https://script.googleapis.com/v1/projects/123ABC/deployments/ABC123',
+      'GET'
+    );
+  }
+  static testMethod void mrr_GoogleAppsScriptDeploymentsListRequest() {
+    MRR_GoogleAppsScriptDeployments deployments = createGoogleAppsScriptDeployments();
+    MRR_GoogleAppsScriptDeployments.ListRequest listRequest = deployments.listRequest(
+      '123ABC'
+    );
+    assertRequestEndpointAndMethod(
+      listRequest,
+      'https://script.googleapis.com/v1/projects/123ABC/deployments/',
+      'GET'
+    );
+
+    System.assertEquals(
+      listRequest.getPageToken(),
+      null,
+      'Page token does not match'
+    );
+    System.assertEquals(
+      listRequest.getPageSize(),
+      null,
+      'Page size does not match'
+    );
+    listRequest.setPageToken('123');
+    listRequest.setPageSize(2);
+    System.assertEquals(
+      listRequest.getPageToken(),
+      '123',
+      'Page token does not match'
+    );
+    System.assertEquals(
+      listRequest.getPageSize(),
+      2,
+      'Page size does not match'
+    );
+  }
+  static testMethod void mrr_GoogleAppsScriptDeploymentsList0Response() {
+    //Create all the required sub-classes
+    MRR_GoogleAppsScriptModelDeployment[] deployments = new List<MRR_GoogleAppsScriptModelDeployment>();
+    MRR_GoogleAppsScriptModelDeployment.DeploymentConfig deploymentConfig = new MRR_GoogleAppsScriptModelDeployment.DeploymentConfig();
+    deploymentConfig.setScriptId('123ABC')
+      .setVersionNumber(5)
+      .setManifestFileName('Test')
+      .setDescription('Test');
+
+    MRR_GoogleAppsScriptModelDeployment.WebAppConfig webAppConfig = new MRR_GoogleAppsScriptModelDeployment.WebAppConfig();
+    webAppConfig.setAccess(MRR_GoogleAppsScriptModelDeployment.Access.MYSELF)
+      .setExecuteAs(
+        MRR_GoogleAppsScriptModelDeployment.ExecuteAs.USER_ACCESSING
+      );
+    MRR_GoogleAppsScriptModelDeployment.WebAppEntryPoint webAppEntryPoint = new MRR_GoogleAppsScriptModelDeployment.WebAppEntryPoint();
+    webAppEntryPoint.setUrl('www.test.com').setEntryPointConfig(webAppConfig);
+    MRR_GoogleAppsScriptModelDeployment.ExecutionApiConfig executionApiConfig = new MRR_GoogleAppsScriptModelDeployment.ExecutionApiConfig();
+    executionApiConfig.setAccess(
+      MRR_GoogleAppsScriptModelDeployment.Access.MYSELF
+    );
+    MRR_GoogleAppsScriptModelDeployment.ExecutionApiEntryPoint executionApiEntryPoint = new MRR_GoogleAppsScriptModelDeployment.ExecutionApiEntryPoint();
+    executionApiEntryPoint.setEntryPointConfig(executionApiConfig);
+    MRR_GoogleAppsScriptModelDeployment.AddOnEntryPoint addOnEntryPoint = new MRR_GoogleAppsScriptModelDeployment.AddOnEntryPoint();
+    addOnEntryPoint.setAddOnType(
+        MRR_GoogleAppsScriptModelDeployment.AddOnType.GMAIL
+      )
+      .setTitle('Test')
+      .setDescription('Test')
+      .setHelpUrl('www.test.com')
+      .setReportIssueUrl('www.test.com')
+      .setPostInstallTipUrl('www.test.com');
+    MRR_GoogleAppsScriptModelDeployment.EntryPoint entryPoint = new MRR_GoogleAppsScriptModelDeployment.EntryPoint();
+    entryPoint.setEntryPointType(
+        MRR_GoogleAppsScriptModelDeployment.EntryPointType.WEB_APP
+      )
+      .setWebApp(webAppEntryPoint)
+      .setExecutionApi(executionApiEntryPoint)
+      .setAddOn(addOnEntryPoint);
+    MRR_GoogleAppsScriptModelDeployment.EntryPoint[] entryPoints = new List<MRR_GoogleAppsScriptModelDeployment.EntryPoint>();
+    entryPoints.add(entryPoint);
+    MRR_GoogleAppsScriptModelDeployment deployment = new MRR_GoogleAppsScriptModelDeployment();
+    deployment.setDeploymentId('123ABC')
+      .setDeploymentConfig(deploymentConfig)
+      .setUpdateTime('2019-10-12T07:20:50.52Z')
+      .setEntryPoints(entryPoints);
+    deployments.add(deployment);
+
+    //Create the file class. Chain the set calls so that we can check that we correctly return the file object.
+    MRR_GoogleAppsScriptDeployments.ListRequestDeployments deploymentsResponse = new MRR_GoogleAppsScriptDeployments.ListRequestDeployments();
+    deploymentsResponse.setDeployments(deployments).setNextPageToken('123');
+
+    //Assert that we get the appropriate return values.
+    System.assertEquals(
+      deploymentsResponse.getDeployments(),
+      deployments,
+      'Deployments do not match'
+    );
+    System.assertEquals(
+      deploymentsResponse.getNextPageToken(),
+      '123',
+      'Next page token does not match'
+    );
+  }
+  static testMethod void mrr_GoogleAppsScriptDeploymentsUpdateRequest() {
+    MRR_GoogleAppsScriptModelDeployment.DeploymentConfig deploymentConfig = new MRR_GoogleAppsScriptModelDeployment.DeploymentConfig();
+    deploymentConfig.setScriptId('123ABC')
+      .setVersionNumber(2)
+      .setManifestFileName('Test')
+      .setDescription('Test');
+
+    MRR_GoogleAppsScriptDeployments deployments = createGoogleAppsScriptDeployments();
+    MRR_GoogleAppsScriptDeployments.UpdateRequest updateRequest = deployments.updateRequest(
+      '123ABC',
+      'ABC123',
+      deploymentConfig
+    );
+    assertRequestEndpointAndMethod(
+      updateRequest,
+      'https://script.googleapis.com/v1/projects/123ABC/deployments/ABC123',
+      'PUT'
+    );
+  }
+
+  /**
    * Helper methods
    */
 
@@ -449,6 +610,27 @@ private class MRR_GoogleAppsScriptTest {
     projects.setService(gas);
 
     return projects;
+  }
+  private static MRR_GoogleAppsScriptDeployments createGoogleAppsScriptDeployments() {
+    MRR_GoogleAppsScript gas = createGoogleAppsScript();
+    MRR_GoogleAppsScriptDeployments deployments = gas.deployments();
+    System.assert(deployments != null, 'Deployments should not be null.');
+    System.assertEquals(
+      deployments.getService(),
+      gas,
+      'Service does not match'
+    );
+
+    deployments.setService(null);
+    System.assertEquals(
+      deployments.getService(),
+      null,
+      'Service does not match'
+    );
+
+    deployments.setService(gas);
+
+    return deployments;
   }
   private static void assertRequestEndpointAndMethod(
     MRR_GoogleAppsScriptResource.GoogleAppsScriptRequest request,

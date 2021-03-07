@@ -184,16 +184,16 @@ public with sharing class MRR_GoogleAppsScriptDeployments extends MRR_GoogleApps
     /**
      * Request parameters
      */
-    public Boolean getPageSize() {
-      return getParam('pageSize', false);
+    public Integer getPageSize() {
+      return getParam('pageSize', (Integer) null);
     }
     public ListRequest setPageSize(Integer pageSize) {
       addParam('pageSize', pageSize);
       return this;
     }
 
-    public Boolean getPageToken() {
-      return getParam('pageToken', false);
+    public String getPageToken() {
+      return getParam('pageToken', (String) null);
     }
     public ListRequest setPageToken(String pageToken) {
       addParam('pageToken', pageToken);
@@ -238,7 +238,7 @@ public with sharing class MRR_GoogleAppsScriptDeployments extends MRR_GoogleApps
     public MRR_GoogleAppsScriptModelDeployment[] getDeployments() {
       return deployments;
     }
-    public ListRequestDeployments setFiles(
+    public ListRequestDeployments setDeployments(
       MRR_GoogleAppsScriptModelDeployment[] deployments
     ) {
       this.deployments = deployments;
