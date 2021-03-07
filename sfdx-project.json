@@ -2,10 +2,24 @@
   "packageDirectories": [
     {
       "path": "force-app",
-      "default": true
+      "default": true,
+      "dependencies": [
+        {
+          "package": "ffhttp-core-sfdx",
+          "versionNumber": "1.0.0.2"
+        }
+      ],
+      "package": "mrr-googleappsscript",
+      "versionName": "ver 1.0",
+      "versionNumber": "1.0.0.NEXT"
     }
   ],
   "namespace": "",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "50.0"
+  "sourceApiVersion": "50.0",
+  "packageAliases": {
+    "mrr-googleappsscript": "0Ho4T000000TN9ESAW",
+    "ffhttp-core-sfdx": "0Ho4T000000TN99SAG",
+    "mrr-googleappsscript@1.0.0-1": "04t4T000001ZFgZQAW"
+  }
 }
