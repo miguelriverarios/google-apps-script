@@ -493,7 +493,7 @@ private class MRR_GoogleAppsScriptTest {
       'Page size does not match'
     );
   }
-  static testMethod void mrr_GoogleAppsScriptDeploymentsList0Response() {
+  static testMethod void mrr_GoogleAppsScriptDeploymentsListResponse() {
     //Create all the required sub-classes
     MRR_GoogleAppsScriptModelDeployment[] deployments = new List<MRR_GoogleAppsScriptModelDeployment>();
     MRR_GoogleAppsScriptModelDeployment.DeploymentConfig deploymentConfig = new MRR_GoogleAppsScriptModelDeployment.DeploymentConfig();
@@ -577,6 +577,99 @@ private class MRR_GoogleAppsScriptTest {
   }
 
   /**
+   * MRR_GoogleAppsScriptVersions tests
+   */
+  static testMethod void mrr_GoogleAppsScriptVersionsCreateRequest() {
+    MRR_GoogleAppsScriptModelVersion version = new MRR_GoogleAppsScriptModelVersion();
+    version.setVersionNumber(2)
+      .setDescription('Test')
+      .setCreateTime('2019-10-12T07:20:50.52Z');
+
+    MRR_GoogleAppsScriptVersions versions = createGoogleAppsScriptVersions();
+    MRR_GoogleAppsScriptVersions.CreateRequest createRequest = versions.createRequest(
+      '123ABC',
+      version
+    );
+    assertRequestEndpointAndMethod(
+      createRequest,
+      'https://script.googleapis.com/v1/projects/123ABC/versions/',
+      'POST'
+    );
+  }
+  static testMethod void mrr_GoogleAppsScriptVersionsGetRequest() {
+    MRR_GoogleAppsScriptVersions versions = createGoogleAppsScriptVersions();
+    MRR_GoogleAppsScriptVersions.GetRequest getRequest = versions.getRequest(
+      '123ABC',
+      2
+    );
+    assertRequestEndpointAndMethod(
+      getRequest,
+      'https://script.googleapis.com/v1/projects/123ABC/versions/2',
+      'GET'
+    );
+  }
+  static testMethod void mrr_GoogleAppsScriptVersionsListRequest() {
+    MRR_GoogleAppsScriptVersions versions = createGoogleAppsScriptVersions();
+    MRR_GoogleAppsScriptVersions.ListRequest listRequest = versions.listRequest(
+      '123ABC'
+    );
+    assertRequestEndpointAndMethod(
+      listRequest,
+      'https://script.googleapis.com/v1/projects/123ABC/versions/',
+      'GET'
+    );
+
+    System.assertEquals(
+      listRequest.getPageToken(),
+      null,
+      'Page token does not match'
+    );
+    System.assertEquals(
+      listRequest.getPageSize(),
+      null,
+      'Page size does not match'
+    );
+    listRequest.setPageToken('123');
+    listRequest.setPageSize(2);
+    System.assertEquals(
+      listRequest.getPageToken(),
+      '123',
+      'Page token does not match'
+    );
+    System.assertEquals(
+      listRequest.getPageSize(),
+      2,
+      'Page size does not match'
+    );
+  }
+  static testMethod void mrr_GoogleAppsScriptVersionsListResponse() {
+    //Create all the required sub-classes
+    MRR_GoogleAppsScriptModelVersion[] versions = new List<MRR_GoogleAppsScriptModelVersion>();
+    MRR_GoogleAppsScriptModelVersion version = new MRR_GoogleAppsScriptModelVersion();
+    version.setScriptId('123ABC')
+      .setVersionNumber(5)
+      .setDescription('Test')
+      .setCreateTime('2019-10-12T07:20:50.52Z');
+    versions.add(version);
+
+    //Create the file class. Chain the set calls so that we can check that we correctly return the file object.
+    MRR_GoogleAppsScriptVersions.ListRequestVersions versionsResponse = new MRR_GoogleAppsScriptVersions.ListRequestVersions();
+    versionsResponse.setVersions(versions).setNextPageToken('123');
+
+    //Assert that we get the appropriate return values.
+    System.assertEquals(
+      versionsResponse.getVersions(),
+      versions,
+      'Versions do not match'
+    );
+    System.assertEquals(
+      versionsResponse.getNextPageToken(),
+      '123',
+      'Next page token does not match'
+    );
+  }
+
+  /**
    * Helper methods
    */
 
@@ -631,6 +724,19 @@ private class MRR_GoogleAppsScriptTest {
     deployments.setService(gas);
 
     return deployments;
+  }
+  private static MRR_GoogleAppsScriptVersions createGoogleAppsScriptVersions() {
+    MRR_GoogleAppsScript gas = createGoogleAppsScript();
+    MRR_GoogleAppsScriptVersions versions = gas.versions();
+    System.assert(versions != null, 'Versions should not be null.');
+    System.assertEquals(versions.getService(), gas, 'Service does not match');
+
+    versions.setService(null);
+    System.assertEquals(versions.getService(), null, 'Service does not match');
+
+    versions.setService(gas);
+
+    return versions;
   }
   private static void assertRequestEndpointAndMethod(
     MRR_GoogleAppsScriptResource.GoogleAppsScriptRequest request,

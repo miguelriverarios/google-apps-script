@@ -126,16 +126,16 @@ public with sharing class MRR_GoogleAppsScriptVersions extends MRR_GoogleAppsScr
     /**
      * Request parameters
      */
-    public Boolean getPageSize() {
-      return getParam('pageSize', false);
+    public Integer getPageSize() {
+      return getParam('pageSize', (Integer) null);
     }
     public ListRequest setPageSize(Integer pageSize) {
       addParam('pageSize', pageSize);
       return this;
     }
 
-    public Boolean getPageToken() {
-      return getParam('pageToken', false);
+    public String getPageToken() {
+      return getParam('pageToken', (String) null);
     }
     public ListRequest setPageToken(String pageToken) {
       addParam('pageToken', pageToken);
