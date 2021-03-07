@@ -306,18 +306,6 @@ private class MRR_GoogleAppsScriptModelTest {
       user,
       'Last modify user does not match'
     );
-    System.assertEquals(user.getDomain(), 'Test', 'Domain does not match');
-    System.assertEquals(
-      user.getEmail(),
-      'test@gmail.com',
-      'Email does not match'
-    );
-    System.assertEquals(user.getName(), 'Test', 'Name does not match');
-    System.assertEquals(
-      user.getPhotoUrl(),
-      'www.test.com',
-      'Photo URL does not match'
-    );
   }
   static testMethod void mrr_GoogleAppsScriptModelVersion() {
     //Create the file class. Chain the set calls so that we can check that we correctly return the file object.
@@ -407,5 +395,27 @@ private class MRR_GoogleAppsScriptModelTest {
       'Functions do not match'
     );
     System.assertEquals(function.getName(), 'Test', 'Name does not match');
+  }
+  static testMethod void mrr_GoogleAppsScriptModelUser() {
+    //Create the file class. Chain the set calls so that we can check that we correctly return the file object.
+    MRR_GoogleAppsScriptModelUser user = new MRR_GoogleAppsScriptModelUser();
+    user.setDomain('Test')
+      .setEmail('test@gmail.com')
+      .setName('Test')
+      .setPhotoUrl('www.test.com');
+
+    //Assert that we get the appropriate return values.
+    System.assertEquals(user.getDomain(), 'Test', 'Domain does not match');
+    System.assertEquals(
+      user.getEmail(),
+      'test@gmail.com',
+      'Email does not match'
+    );
+    System.assertEquals(user.getName(), 'Test', 'Name does not match');
+    System.assertEquals(
+      user.getPhotoUrl(),
+      'www.test.com',
+      'Photo URL does not match'
+    );
   }
 }
