@@ -319,4 +319,34 @@ private class MRR_GoogleAppsScriptModelTest {
       'Photo URL does not match'
     );
   }
+  static testMethod void mrr_GoogleAppsScriptModelVersion() {
+    //Create the file class. Chain the set calls so that we can check that we correctly return the file object.
+    MRR_GoogleAppsScriptModelVersion version = new MRR_GoogleAppsScriptModelVersion();
+    version.setScriptId('123ABC')
+      .setVersionNumber(5)
+      .setDescription('Test')
+      .setCreateTime('2019-10-12T07:20:50.52Z');
+
+    //Assert that we get the appropriate return values.
+    System.assertEquals(
+      version.getScriptId(),
+      '123ABC',
+      'Script ID does not match'
+    );
+    System.assertEquals(
+      version.getVersionNumber(),
+      5,
+      'Version number does not match'
+    );
+    System.assertEquals(
+      version.getDescription(),
+      'Test',
+      'Description does not match'
+    );
+    System.assertEquals(
+      version.getCreateTime(),
+      '2019-10-12T07:20:50.52Z',
+      'Create time does not match'
+    );
+  }
 }
