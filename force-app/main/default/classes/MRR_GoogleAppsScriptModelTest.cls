@@ -212,4 +212,52 @@ private class MRR_GoogleAppsScriptModelTest {
       'End times do not match'
     );
   }
+  static testMethod void mrr_GoogleAppsScriptModelProcess() {
+    //Create the file class. Chain the set calls so that we can check that we correctly return the file object.
+    MRR_GoogleAppsScriptModelProcess process = new MRR_GoogleAppsScriptModelProcess();
+    process.setProjectName('Test')
+      .setFunctionName('Test')
+      .setProcessType(MRR_GoogleAppsScriptModelProcess.ProcessType.MENU)
+      .setProcessStatus(
+        MRR_GoogleAppsScriptModelProcess.ProcessStatus.COMPLETED
+      )
+      .setUserAccessLevel(
+        MRR_GoogleAppsScriptModelProcess.UserAccessLevel.OWNER
+      )
+      .setStartTime('2019-10-12T07:20:50.52Z')
+      .setDuration('5');
+
+    //Assert that we get the appropriate return values.
+    System.assertEquals(
+      process.getProjectName(),
+      'Test',
+      'Project name does not match'
+    );
+    System.assertEquals(
+      process.getFunctionName(),
+      'Test',
+      'Function name does not match'
+    );
+    System.assertEquals(
+      process.getProcessType(),
+      MRR_GoogleAppsScriptModelProcess.ProcessType.MENU,
+      'Process type does not match'
+    );
+    System.assertEquals(
+      process.getProcessStatus(),
+      MRR_GoogleAppsScriptModelProcess.ProcessStatus.COMPLETED,
+      'Process status does not match'
+    );
+    System.assertEquals(
+      process.getUserAccessLevel(),
+      MRR_GoogleAppsScriptModelProcess.UserAccessLevel.OWNER,
+      'User access level does not match'
+    );
+    System.assertEquals(
+      process.getStartTime(),
+      '2019-10-12T07:20:50.52Z',
+      'Start time does not match'
+    );
+    System.assertEquals(process.getDuration(), '5', 'Duration does not match');
+  }
 }
