@@ -6,6 +6,47 @@ public with sharing class MRR_GoogleAppsScriptModelDeployment extends MRR_Google
   // "Zulu" format, with nanosecond resolution and up to nine fractional digits)
   private EntryPoint[] entryPoints; //The deployment's entry points
 
+  /**
+   * Get/Sets
+   */
+  public String getDeploymentId() {
+    return deploymentId;
+  }
+  public MRR_GoogleAppsScriptModelDeployment setDeploymentId(
+    String deploymentId
+  ) {
+    this.deploymentId = deploymentId;
+    return this;
+  }
+
+  public DeploymentConfig getDeploymentConfig() {
+    return deploymentConfig;
+  }
+  public MRR_GoogleAppsScriptModelDeployment setDeploymentConfig(
+    DeploymentConfig deploymentConfig
+  ) {
+    this.deploymentConfig = deploymentConfig;
+    return this;
+  }
+
+  public String getUpdateTime() {
+    return updateTime;
+  }
+  public MRR_GoogleAppsScriptModelDeployment setUpdateTime(String updateTime) {
+    this.updateTime = updateTime;
+    return this;
+  }
+
+  public EntryPoint[] getEntryPoints() {
+    return entryPoints;
+  }
+  public MRR_GoogleAppsScriptModelDeployment setEntryPoints(
+    EntryPoint[] entryPoints
+  ) {
+    this.entryPoints = entryPoints;
+    return this;
+  }
+
   public class DeploymentConfig extends ffhttp_AbstractJsonSerializable {
     // Instance Variables
     private String scriptId; // The script project's Drive ID
@@ -55,6 +96,41 @@ public with sharing class MRR_GoogleAppsScriptModelDeployment extends MRR_Google
     private WebAppEntryPoint webApp; // An entry point specification for web apps
     private ExecutionApiEntryPoint executionApi; // An entry point specification for Apps Script API execution calls
     private AddOnEntryPoint addOn; // Add-on properties
+
+    /**
+     * Get/Sets
+     */
+    public EntryPointType getEntryPointType() {
+      return entryPointType;
+    }
+    public EntryPoint setEntryPointType(EntryPointType entryPointType) {
+      this.entryPointType = entryPointType;
+      return this;
+    }
+
+    public WebAppEntryPoint getWebApp() {
+      return webApp;
+    }
+    public EntryPoint setWebApp(WebAppEntryPoint webApp) {
+      this.webApp = webApp;
+      return this;
+    }
+
+    public ExecutionApiEntryPoint getExecutionApi() {
+      return executionApi;
+    }
+    public EntryPoint setExecutionApi(ExecutionApiEntryPoint executionApi) {
+      this.executionApi = executionApi;
+      return this;
+    }
+
+    public AddOnEntryPoint getAddOn() {
+      return addOn;
+    }
+    public EntryPoint setAddOn(AddOnEntryPoint addOn) {
+      this.addOn = addOn;
+      return this;
+    }
   }
 
   public class WebAppEntryPoint extends ffhttp_AbstractJsonSerializable {
