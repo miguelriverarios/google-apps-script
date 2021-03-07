@@ -267,6 +267,158 @@ private class MRR_GoogleAppsScriptTest {
     );
   }
 
+  /**
+   * MRR_GoogleAppsScriptProjects tests
+   */
+  static testMethod void mrr_GoogleAppsScriptProjectsCreateRequest() {
+    MRR_GoogleAppsScriptModelProject project = new MRR_GoogleAppsScriptModelProject();
+    project.setTitle('Test').setParentId('123ABC');
+
+    MRR_GoogleAppsScriptProjects projects = createGoogleAppsScriptProjects();
+    MRR_GoogleAppsScriptProjects.CreateRequest createRequest = projects.createRequest(
+      project
+    );
+    assertRequestEndpointAndMethod(
+      createRequest,
+      'https://script.googleapis.com/v1/projects/',
+      'POST'
+    );
+  }
+  static testMethod void mrr_GoogleAppsScriptProjectsGetRequest() {
+    MRR_GoogleAppsScriptProjects projects = createGoogleAppsScriptProjects();
+    MRR_GoogleAppsScriptProjects.GetRequest getRequest = projects.getRequest(
+      '123ABC'
+    );
+    assertRequestEndpointAndMethod(
+      getRequest,
+      'https://script.googleapis.com/v1/projects/123ABC',
+      'GET'
+    );
+  }
+  static testMethod void mrr_GoogleAppsScriptProjectsGetContentRequest() {
+    MRR_GoogleAppsScriptProjects projects = createGoogleAppsScriptProjects();
+    MRR_GoogleAppsScriptProjects.GetContentRequest getContentRequest = projects.getContentRequest(
+      '123ABC'
+    );
+    assertRequestEndpointAndMethod(
+      getContentRequest,
+      'https://script.googleapis.com/v1/projects/123ABC/content',
+      'GET'
+    );
+
+    System.assertEquals(
+      getContentRequest.getVersionNumber(),
+      null,
+      'Version numbers do not match'
+    );
+
+    getContentRequest.setVersionNumber(2);
+
+    System.assertEquals(
+      getContentRequest.getVersionNumber(),
+      2,
+      'Version numbers do not match'
+    );
+  }
+  static testMethod void mrr_GoogleAppsScriptGetContentResponse() {
+    //Create all the required sub-classes
+    MRR_GoogleAppsScriptModelFile[] files = new List<MRR_GoogleAppsScriptModelFile>();
+    MRR_GoogleAppsScriptModelFile.Function function = new MRR_GoogleAppsScriptModelFile.Function();
+    function.setName('Test');
+    MRR_GoogleAppsScriptModelFile.Function[] functions = new List<MRR_GoogleAppsScriptModelFile.Function>();
+    functions.add(function);
+    MRR_GoogleAppsScriptModelFile.FunctionSet functionSet = new MRR_GoogleAppsScriptModelFile.FunctionSet();
+    functionSet.setValues(functions);
+    MRR_GoogleAppsScriptModelUser user = new MRR_GoogleAppsScriptModelUser();
+    user.setDomain('Test')
+      .setEmail('test@gmail.com')
+      .setName('Test')
+      .setPhotoUrl('www.test.com');
+    MRR_GoogleAppsScriptModelFile file = new MRR_GoogleAppsScriptModelFile();
+    file.setName('Test')
+      .setType(MRR_GoogleAppsScriptModelFile.FileType.HTML)
+      .setSource('Test')
+      .setLastModifyUser(user)
+      .setCreateTime('2019-10-12T07:20:50.52Z')
+      .setUpdateTime('2019-10-12T07:20:50.52Z')
+      .setFunctionSet(functionSet);
+    files.add(file);
+
+    //Create the file class. Chain the set calls so that we can check that we correctly return the file object.
+    MRR_GoogleAppsScriptProjects.Content filesResponse = new MRR_GoogleAppsScriptProjects.Content();
+    filesResponse.setScriptId('123ABC').setFiles(files);
+
+    //Assert that we get the appropriate return values.
+    System.assertEquals(
+      filesResponse.getScriptId(),
+      '123ABC',
+      'Script ID does not match'
+    );
+    System.assertEquals(filesResponse.getFiles(), files, 'Files do not match');
+  }
+  static testMethod void mrr_GoogleAppsScriptProjectsGetMetricsRequest() {
+    MRR_GoogleAppsScriptProjects projects = createGoogleAppsScriptProjects();
+    MRR_GoogleAppsScriptProjects.GetMetricsRequest getMetricsRequest = projects.getMetricsRequest(
+      '123ABC'
+    );
+    assertRequestEndpointAndMethod(
+      getMetricsRequest,
+      'https://script.googleapis.com/v1/projects/123ABC/metrics',
+      'GET'
+    );
+
+    MRR_GoogleAppsScriptProjects.MetricsFilter metricsFilter = new MRR_GoogleAppsScriptProjects.MetricsFilter();
+    metricsFilter.setDeploymentId('123ABC');
+
+    System.assertEquals(
+      getMetricsRequest.getMetricsGranularity(),
+      null,
+      'Metrics granularity does not match'
+    );
+    System.assertEquals(
+      getMetricsRequest.getMetricsFilter(),
+      null,
+      'Metrics filter does not match'
+    );
+
+    getMetricsRequest.setMetricsGranularity(
+      MRR_GoogleAppsScriptModelMetrics.MetricsGranularity.DAILY
+    );
+    getMetricsRequest.setMetricsFilter(metricsFilter);
+
+    System.assertEquals(
+      getMetricsRequest.getMetricsGranularity(),
+      MRR_GoogleAppsScriptModelMetrics.MetricsGranularity.DAILY,
+      'Metrics granularity does not match'
+    );
+    System.assertEquals(
+      getMetricsRequest.getMetricsFilter(),
+      metricsFilter,
+      'Metrics filter does not match'
+    );
+    System.assertEquals(
+      metricsFilter.getDeploymentId(),
+      '123ABC',
+      'Deployment ID does not match'
+    );
+  }
+  static testMethod void mrr_GoogleAppsScriptProjectsUpdateContentRequest() {
+    MRR_GoogleAppsScriptProjects projects = createGoogleAppsScriptProjects();
+    MRR_GoogleAppsScriptProjects.UpdateContentRequest updateContentRequest = projects.updateContentRequest(
+      '123ABC',
+      Blob.valueOf('Testing Blob')
+    );
+    assertRequestEndpointAndMethod(
+      updateContentRequest,
+      'https://script.googleapis.com/v1/projects/123ABC/content',
+      'PUT'
+    );
+  }
+
+  /**
+   * Helper methods
+   */
+
   private static MRR_GoogleAppsScript createGoogleAppsScript() {
     return new MRR_GoogleAppsScript(
       new ffhttp_Client.AccessTokenCredentials('Bearer', 'Dummy Access Token')
@@ -284,6 +436,19 @@ private class MRR_GoogleAppsScriptTest {
     processes.setService(gas);
 
     return processes;
+  }
+  private static MRR_GoogleAppsScriptProjects createGoogleAppsScriptProjects() {
+    MRR_GoogleAppsScript gas = createGoogleAppsScript();
+    MRR_GoogleAppsScriptProjects projects = gas.projects();
+    System.assert(projects != null, 'Projects should not be null.');
+    System.assertEquals(projects.getService(), gas, 'Service does not match');
+
+    projects.setService(null);
+    System.assertEquals(projects.getService(), null, 'Service does not match');
+
+    projects.setService(gas);
+
+    return projects;
   }
   private static void assertRequestEndpointAndMethod(
     MRR_GoogleAppsScriptResource.GoogleAppsScriptRequest request,

@@ -72,4 +72,11 @@ public with sharing class MRR_GoogleAppsScriptModelMetrics {
       return this;
     }
   }
+
+  // Enums
+  public enum MetricsGranularity {
+    UNSPECIFIED_GRANULARITY, // Default metric granularity used to query no metrics
+    WEEKLY, // Represents weekly metrics
+    DAILY // Represents daily metrics over a period of 7 days
+  }
 }

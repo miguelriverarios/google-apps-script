@@ -69,7 +69,7 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
    * @param scriptId The ID of the script to get metrics from.
    * @return the request
    */
-  public GetMetricsRequest getMetrics(String scriptId) {
+  public GetMetricsRequest getMetricsRequest(String scriptId) {
     return new GetMetricsRequest(this, scriptId);
   }
 
@@ -84,14 +84,17 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
    * parameters, call the execute method to invoke the remote operation
    *
    * @param scriptId The ID of the script to update.
-   * @param scriptId The contents of the script in Blob format.
+   * @param scriptContents The contents of the script in Blob format.
    * @return the request
    */
-  public UpdateContentRequest updateContent(
+  public UpdateContentRequest updateContentRequest(
     String scriptId,
     Blob scriptContents
   ) {
-    ffhttp_BlobContent br = new ffhttp_BlobContent(scriptContents, null);
+    ffhttp_BlobContent br = new ffhttp_BlobContent(
+      scriptContents,
+      'text/plain'
+    );
 
     return new UpdateContentRequest(this, scriptId, br);
   }
@@ -140,15 +143,15 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
         COMMAND_CONTENT,
         REQUEST_METHOD_GET,
         null,
-        new ffhttp_JsonDeserializer(MRR_GoogleAppsScriptModelProject.class)
+        new ffhttp_JsonDeserializer(Content.class)
       );
     }
 
     /**
      * Request parameters
      */
-    public Boolean getVersionNumber() {
-      return getParam('versionNumber', false);
+    public Integer getVersionNumber() {
+      return getParam('versionNumber', (Integer) null);
     }
     public GetContentRequest setVersionNumber(Integer versionNumber) {
       addParam('versionNumber', versionNumber);
@@ -174,18 +177,20 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
     /**
      * Request parameters
      */
-    public Boolean getMetricsGranularity() {
-      return getParam('metricsGranularity', false);
+    public MRR_GoogleAppsScriptModelMetrics.MetricsGranularity getMetricsGranularity() {
+      return (MRR_GoogleAppsScriptModelMetrics.MetricsGranularity) getParamObj(
+        'metricsGranularity'
+      );
     }
     public GetMetricsRequest setMetricsGranularity(
-      MetricsGranularity metricsGranularity
+      MRR_GoogleAppsScriptModelMetrics.MetricsGranularity metricsGranularity
     ) {
       addParam('metricsGranularity', metricsGranularity);
       return this;
     }
 
-    public Boolean getMetricsFilter() {
-      return getParam('metricsFilter', false);
+    public MetricsFilter getMetricsFilter() {
+      return (MetricsFilter) getParamObj('metricsFilter');
     }
     public GetMetricsRequest setMetricsFilter(MetricsFilter metricsFilter) {
       addParam('metricsFilter', metricsFilter);
@@ -208,7 +213,7 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
         COMMAND_CONTENT,
         REQUEST_METHOD_PUT,
         scriptContents,
-        new ffhttp_JsonDeserializer(MRR_GoogleAppsScriptModelProject.class)
+        new ffhttp_JsonDeserializer(Content.class)
       );
     }
   }
@@ -217,18 +222,27 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
    * Inner Classes
    *********************************************************************************************************/
 
-  public class UpdateContentFiles {
+  public class Content {
     // Instance Variables
+    private String scriptId; // The script project's Drive ID.
     private MRR_GoogleAppsScriptModelFile[] files; // The list of script project files. One of the files is a script manifest;
     // it must be named "appsscript", must have type of JSON, and include the manifest configurations for the project.
 
     /**
      * Get/Sets
      */
+    public String getScriptId() {
+      return scriptId;
+    }
+    public Content setScriptId(String scriptId) {
+      this.scriptId = scriptId;
+      return this;
+    }
+
     public MRR_GoogleAppsScriptModelFile[] getFiles() {
       return files;
     }
-    public UpdateContentFiles setFiles(MRR_GoogleAppsScriptModelFile[] files) {
+    public Content setFiles(MRR_GoogleAppsScriptModelFile[] files) {
       this.files = files;
       return this;
     }
@@ -248,12 +262,5 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
       this.deploymentId = deploymentId;
       return this;
     }
-  }
-
-  // Enums
-  public enum MetricsGranularity {
-    UNSPECIFIED_GRANULARITY, // Default metric granularity used to query no metrics
-    WEEKLY, // Represents weekly metrics
-    DAILY // Represents daily metrics over a period of 7 days
   }
 }
