@@ -169,4 +169,47 @@ private class MRR_GoogleAppsScriptModelTest {
       'Deployment configuration description does not match'
     );
   }
+  static testMethod void mrr_GoogleAppsScriptModelMetrics() {
+    //Create all the required sub-classes
+    MRR_GoogleAppsScriptModelMetrics.MetricsValue metricsValue = new MRR_GoogleAppsScriptModelMetrics.MetricsValue();
+    metricsValue.setValue('10')
+      .setStartTime('2019-10-12T07:20:50.52Z')
+      .setEndTime('2019-10-12T07:20:50.52Z');
+    MRR_GoogleAppsScriptModelMetrics.MetricsValue[] metricsValues = new List<MRR_GoogleAppsScriptModelMetrics.MetricsValue>();
+    metricsValues.add(metricsValue);
+
+    //Create the file class. Chain the set calls so that we can check that we correctly return the file object.
+    MRR_GoogleAppsScriptModelMetrics metrics = new MRR_GoogleAppsScriptModelMetrics();
+    metrics.setActiveUsers(metricsValues)
+      .setTotalExecutions(metricsValues)
+      .setFailedExecutions(metricsValues);
+
+    //Assert that we get the appropriate return values.
+    System.assertEquals(
+      metrics.getActiveUsers(),
+      metricsValues,
+      'Active users do not match'
+    );
+    System.assertEquals(
+      metrics.getTotalExecutions(),
+      metricsValues,
+      'Total executions do not match'
+    );
+    System.assertEquals(
+      metrics.getFailedExecutions(),
+      metricsValues,
+      'Failed executions do not match'
+    );
+    System.assertEquals(metricsValue.getValue(), '10', 'Values do not match');
+    System.assertEquals(
+      metricsValue.getStartTime(),
+      '2019-10-12T07:20:50.52Z',
+      'Start times do not match'
+    );
+    System.assertEquals(
+      metricsValue.getEndTime(),
+      '2019-10-12T07:20:50.52Z',
+      'End times do not match'
+    );
+  }
 }

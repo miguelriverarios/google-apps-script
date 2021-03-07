@@ -10,13 +10,31 @@ public with sharing class MRR_GoogleAppsScriptModelMetrics {
   public MetricsValue[] getActiveUsers() {
     return activeUsers;
   }
+  public MRR_GoogleAppsScriptModelMetrics setActiveUsers(
+    MetricsValue[] activeUsers
+  ) {
+    this.activeUsers = activeUsers;
+    return this;
+  }
 
   public MetricsValue[] getTotalExecutions() {
     return totalExecutions;
   }
+  public MRR_GoogleAppsScriptModelMetrics setTotalExecutions(
+    MetricsValue[] totalExecutions
+  ) {
+    this.totalExecutions = totalExecutions;
+    return this;
+  }
 
   public MetricsValue[] getFailedExecutions() {
     return failedExecutions;
+  }
+  public MRR_GoogleAppsScriptModelMetrics setFailedExecutions(
+    MetricsValue[] failedExecutions
+  ) {
+    this.failedExecutions = failedExecutions;
+    return this;
   }
 
   public class MetricsValue {
@@ -33,13 +51,25 @@ public with sharing class MRR_GoogleAppsScriptModelMetrics {
     public String getValue() {
       return value;
     }
+    public MetricsValue setValue(String value) {
+      this.value = value;
+      return this;
+    }
 
     public String getStartTime() {
       return startTime;
     }
+    public MetricsValue setStartTime(String startTime) {
+      this.startTime = startTime;
+      return this;
+    }
 
     public String getEndTime() {
       return endTime;
+    }
+    public MetricsValue setEndTime(String endTime) {
+      this.endTime = endTime;
+      return this;
     }
   }
 }
