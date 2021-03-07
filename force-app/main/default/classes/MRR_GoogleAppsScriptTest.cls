@@ -46,6 +46,13 @@ private class MRR_GoogleAppsScriptTest {
       .setStatuses(statuses)
       .setUserAccessLevels(userAccessLevels);
 
+    System.assertEquals(listRequest.getPrettyPrint(), true);
+    listRequest.setPrettyPrint(false);
+    System.assertEquals(listRequest.getPrettyPrint(), false);
+    System.assertEquals(listRequest.getFields(), null);
+    listRequest.setFields('Test');
+    System.assertEquals(listRequest.getFields(), 'Test');
+
     System.assertEquals(
       listRequest.getUserProcessFilter(),
       null,
