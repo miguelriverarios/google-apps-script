@@ -177,7 +177,9 @@ public with sharing class MRR_GoogleAppsScriptDeployments extends MRR_GoogleApps
         ENDPOINT_DEPLOYMENTS,
         REQUEST_METHOD_GET,
         null,
-        new ffhttp_JsonDeserializer(ListRequestDeployments.class)
+        new ffhttp_JsonDeserializer(
+          MRR_GoogleAppsScriptModelListDeployments.class
+        )
       );
     }
 
@@ -220,37 +222,6 @@ public with sharing class MRR_GoogleAppsScriptDeployments extends MRR_GoogleApps
         deploymentConfig,
         new ffhttp_JsonDeserializer(MRR_GoogleAppsScriptModelDeployment.class)
       );
-    }
-  }
-
-  /*********************************************************************************************************
-   * Inner Classes
-   *********************************************************************************************************/
-
-  public class ListRequestDeployments {
-    // Instance Variables
-    private MRR_GoogleAppsScriptModelDeployment[] deployments; // The list of deployments.
-    private String nextPageToken; // The token that can be used in the next call to get the next page of results.
-
-    /**
-     * Get/Sets
-     */
-    public MRR_GoogleAppsScriptModelDeployment[] getDeployments() {
-      return deployments;
-    }
-    public ListRequestDeployments setDeployments(
-      MRR_GoogleAppsScriptModelDeployment[] deployments
-    ) {
-      this.deployments = deployments;
-      return this;
-    }
-
-    public String getNextPageToken() {
-      return nextPageToken;
-    }
-    public ListRequestDeployments setNextPageToken(String nextPageToken) {
-      this.nextPageToken = nextPageToken;
-      return this;
     }
   }
 }

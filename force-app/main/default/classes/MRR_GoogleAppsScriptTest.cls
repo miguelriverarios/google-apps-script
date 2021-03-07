@@ -240,39 +240,6 @@ private class MRR_GoogleAppsScriptTest {
       'User access levels do not match'
     );
   }
-  static testMethod void mrr_GoogleAppsScriptListResponse() {
-    //Create all the required sub-classes
-    MRR_GoogleAppsScriptModelProcess[] processes = new List<MRR_GoogleAppsScriptModelProcess>();
-    MRR_GoogleAppsScriptModelProcess process = new MRR_GoogleAppsScriptModelProcess();
-    process.setProjectName('Test')
-      .setFunctionName('Test')
-      .setProcessType(MRR_GoogleAppsScriptModelProcess.ProcessType.MENU)
-      .setProcessStatus(
-        MRR_GoogleAppsScriptModelProcess.ProcessStatus.COMPLETED
-      )
-      .setUserAccessLevel(
-        MRR_GoogleAppsScriptModelProcess.UserAccessLevel.OWNER
-      )
-      .setStartTime('2019-10-12T07:20:50.52Z')
-      .setDuration('5');
-    processes.add(process);
-
-    //Create the file class. Chain the set calls so that we can check that we correctly return the file object.
-    MRR_GoogleAppsScriptProcesses.Processes processesResponse = new MRR_GoogleAppsScriptProcesses.Processes();
-    processesResponse.setProcesses(processes).setNextPageToken('123');
-
-    //Assert that we get the appropriate return values.
-    System.assertEquals(
-      processesResponse.getProcesses(),
-      processes,
-      'Processes do not match'
-    );
-    System.assertEquals(
-      processesResponse.getNextPageToken(),
-      '123',
-      'Next page token does not match'
-    );
-  }
 
   /**
    * MRR_GoogleAppsScriptProjects tests
@@ -327,42 +294,6 @@ private class MRR_GoogleAppsScriptTest {
       'Version numbers do not match'
     );
   }
-  static testMethod void mrr_GoogleAppsScriptGetContentResponse() {
-    //Create all the required sub-classes
-    MRR_GoogleAppsScriptModelFile[] files = new List<MRR_GoogleAppsScriptModelFile>();
-    MRR_GoogleAppsScriptModelFile.Function function = new MRR_GoogleAppsScriptModelFile.Function();
-    function.setName('Test');
-    MRR_GoogleAppsScriptModelFile.Function[] functions = new List<MRR_GoogleAppsScriptModelFile.Function>();
-    functions.add(function);
-    MRR_GoogleAppsScriptModelFile.FunctionSet functionSet = new MRR_GoogleAppsScriptModelFile.FunctionSet();
-    functionSet.setValues(functions);
-    MRR_GoogleAppsScriptModelUser user = new MRR_GoogleAppsScriptModelUser();
-    user.setDomain('Test')
-      .setEmail('test@gmail.com')
-      .setName('Test')
-      .setPhotoUrl('www.test.com');
-    MRR_GoogleAppsScriptModelFile file = new MRR_GoogleAppsScriptModelFile();
-    file.setName('Test')
-      .setType(MRR_GoogleAppsScriptModelFile.FileType.HTML)
-      .setSource('Test')
-      .setLastModifyUser(user)
-      .setCreateTime('2019-10-12T07:20:50.52Z')
-      .setUpdateTime('2019-10-12T07:20:50.52Z')
-      .setFunctionSet(functionSet);
-    files.add(file);
-
-    //Create the file class. Chain the set calls so that we can check that we correctly return the file object.
-    MRR_GoogleAppsScriptProjects.Content filesResponse = new MRR_GoogleAppsScriptProjects.Content();
-    filesResponse.setScriptId('123ABC').setFiles(files);
-
-    //Assert that we get the appropriate return values.
-    System.assertEquals(
-      filesResponse.getScriptId(),
-      '123ABC',
-      'Script ID does not match'
-    );
-    System.assertEquals(filesResponse.getFiles(), files, 'Files do not match');
-  }
   static testMethod void mrr_GoogleAppsScriptProjectsGetMetricsRequest() {
     MRR_GoogleAppsScriptProjects projects = createGoogleAppsScriptProjects();
     MRR_GoogleAppsScriptProjects.GetMetricsRequest getMetricsRequest = projects.getMetricsRequest(
@@ -410,10 +341,34 @@ private class MRR_GoogleAppsScriptTest {
     );
   }
   static testMethod void mrr_GoogleAppsScriptProjectsUpdateContentRequest() {
+    MRR_GoogleAppsScriptModelContent content = new MRR_GoogleAppsScriptModelContent();
+    MRR_GoogleAppsScriptModelFile[] files = new List<MRR_GoogleAppsScriptModelFile>();
+    MRR_GoogleAppsScriptModelFile.Function function = new MRR_GoogleAppsScriptModelFile.Function();
+    function.setName('Test');
+    MRR_GoogleAppsScriptModelFile.Function[] functions = new List<MRR_GoogleAppsScriptModelFile.Function>();
+    functions.add(function);
+    MRR_GoogleAppsScriptModelFile.FunctionSet functionSet = new MRR_GoogleAppsScriptModelFile.FunctionSet();
+    functionSet.setValues(functions);
+    MRR_GoogleAppsScriptModelUser user = new MRR_GoogleAppsScriptModelUser();
+    user.setDomain('Test')
+      .setEmail('test@gmail.com')
+      .setName('Test')
+      .setPhotoUrl('www.test.com');
+    MRR_GoogleAppsScriptModelFile file = new MRR_GoogleAppsScriptModelFile();
+    file.setName('Test')
+      .setType(MRR_GoogleAppsScriptModelFile.FileType.HTML)
+      .setSource('Test')
+      .setLastModifyUser(user)
+      .setCreateTime('2019-10-12T07:20:50.52Z')
+      .setUpdateTime('2019-10-12T07:20:50.52Z')
+      .setFunctionSet(functionSet);
+    files.add(file);
+    content.setFiles(files);
+
     MRR_GoogleAppsScriptProjects projects = createGoogleAppsScriptProjects();
     MRR_GoogleAppsScriptProjects.UpdateContentRequest updateContentRequest = projects.updateContentRequest(
       '123ABC',
-      Blob.valueOf('Testing Blob')
+      content
     );
     assertRequestEndpointAndMethod(
       updateContentRequest,
@@ -500,69 +455,6 @@ private class MRR_GoogleAppsScriptTest {
       'Page size does not match'
     );
   }
-  static testMethod void mrr_GoogleAppsScriptDeploymentsListResponse() {
-    //Create all the required sub-classes
-    MRR_GoogleAppsScriptModelDeployment[] deployments = new List<MRR_GoogleAppsScriptModelDeployment>();
-    MRR_GoogleAppsScriptModelDeployment.DeploymentConfig deploymentConfig = new MRR_GoogleAppsScriptModelDeployment.DeploymentConfig();
-    deploymentConfig.setScriptId('123ABC')
-      .setVersionNumber(5)
-      .setManifestFileName('Test')
-      .setDescription('Test');
-
-    MRR_GoogleAppsScriptModelDeployment.WebAppConfig webAppConfig = new MRR_GoogleAppsScriptModelDeployment.WebAppConfig();
-    webAppConfig.setAccess(MRR_GoogleAppsScriptModelDeployment.Access.MYSELF)
-      .setExecuteAs(
-        MRR_GoogleAppsScriptModelDeployment.ExecuteAs.USER_ACCESSING
-      );
-    MRR_GoogleAppsScriptModelDeployment.WebAppEntryPoint webAppEntryPoint = new MRR_GoogleAppsScriptModelDeployment.WebAppEntryPoint();
-    webAppEntryPoint.setUrl('www.test.com').setEntryPointConfig(webAppConfig);
-    MRR_GoogleAppsScriptModelDeployment.ExecutionApiConfig executionApiConfig = new MRR_GoogleAppsScriptModelDeployment.ExecutionApiConfig();
-    executionApiConfig.setAccess(
-      MRR_GoogleAppsScriptModelDeployment.Access.MYSELF
-    );
-    MRR_GoogleAppsScriptModelDeployment.ExecutionApiEntryPoint executionApiEntryPoint = new MRR_GoogleAppsScriptModelDeployment.ExecutionApiEntryPoint();
-    executionApiEntryPoint.setEntryPointConfig(executionApiConfig);
-    MRR_GoogleAppsScriptModelDeployment.AddOnEntryPoint addOnEntryPoint = new MRR_GoogleAppsScriptModelDeployment.AddOnEntryPoint();
-    addOnEntryPoint.setAddOnType(
-        MRR_GoogleAppsScriptModelDeployment.AddOnType.GMAIL
-      )
-      .setTitle('Test')
-      .setDescription('Test')
-      .setHelpUrl('www.test.com')
-      .setReportIssueUrl('www.test.com')
-      .setPostInstallTipUrl('www.test.com');
-    MRR_GoogleAppsScriptModelDeployment.EntryPoint entryPoint = new MRR_GoogleAppsScriptModelDeployment.EntryPoint();
-    entryPoint.setEntryPointType(
-        MRR_GoogleAppsScriptModelDeployment.EntryPointType.WEB_APP
-      )
-      .setWebApp(webAppEntryPoint)
-      .setExecutionApi(executionApiEntryPoint)
-      .setAddOn(addOnEntryPoint);
-    MRR_GoogleAppsScriptModelDeployment.EntryPoint[] entryPoints = new List<MRR_GoogleAppsScriptModelDeployment.EntryPoint>();
-    entryPoints.add(entryPoint);
-    MRR_GoogleAppsScriptModelDeployment deployment = new MRR_GoogleAppsScriptModelDeployment();
-    deployment.setDeploymentId('123ABC')
-      .setDeploymentConfig(deploymentConfig)
-      .setUpdateTime('2019-10-12T07:20:50.52Z')
-      .setEntryPoints(entryPoints);
-    deployments.add(deployment);
-
-    //Create the file class. Chain the set calls so that we can check that we correctly return the file object.
-    MRR_GoogleAppsScriptDeployments.ListRequestDeployments deploymentsResponse = new MRR_GoogleAppsScriptDeployments.ListRequestDeployments();
-    deploymentsResponse.setDeployments(deployments).setNextPageToken('123');
-
-    //Assert that we get the appropriate return values.
-    System.assertEquals(
-      deploymentsResponse.getDeployments(),
-      deployments,
-      'Deployments do not match'
-    );
-    System.assertEquals(
-      deploymentsResponse.getNextPageToken(),
-      '123',
-      'Next page token does not match'
-    );
-  }
   static testMethod void mrr_GoogleAppsScriptDeploymentsUpdateRequest() {
     MRR_GoogleAppsScriptModelDeployment.DeploymentConfig deploymentConfig = new MRR_GoogleAppsScriptModelDeployment.DeploymentConfig();
     deploymentConfig.setScriptId('123ABC')
@@ -647,32 +539,6 @@ private class MRR_GoogleAppsScriptTest {
       listRequest.getPageSize(),
       2,
       'Page size does not match'
-    );
-  }
-  static testMethod void mrr_GoogleAppsScriptVersionsListResponse() {
-    //Create all the required sub-classes
-    MRR_GoogleAppsScriptModelVersion[] versions = new List<MRR_GoogleAppsScriptModelVersion>();
-    MRR_GoogleAppsScriptModelVersion version = new MRR_GoogleAppsScriptModelVersion();
-    version.setScriptId('123ABC')
-      .setVersionNumber(5)
-      .setDescription('Test')
-      .setCreateTime('2019-10-12T07:20:50.52Z');
-    versions.add(version);
-
-    //Create the file class. Chain the set calls so that we can check that we correctly return the file object.
-    MRR_GoogleAppsScriptVersions.ListRequestVersions versionsResponse = new MRR_GoogleAppsScriptVersions.ListRequestVersions();
-    versionsResponse.setVersions(versions).setNextPageToken('123');
-
-    //Assert that we get the appropriate return values.
-    System.assertEquals(
-      versionsResponse.getVersions(),
-      versions,
-      'Versions do not match'
-    );
-    System.assertEquals(
-      versionsResponse.getNextPageToken(),
-      '123',
-      'Next page token does not match'
     );
   }
 

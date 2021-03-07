@@ -89,14 +89,14 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
    */
   public UpdateContentRequest updateContentRequest(
     String scriptId,
-    Blob scriptContents
+    MRR_GoogleAppsScriptModelContent scriptContents
   ) {
-    ffhttp_BlobContent br = new ffhttp_BlobContent(
-      scriptContents,
-      'text/plain'
-    );
+    // ffhttp_BlobContent br = new ffhttp_BlobContent(
+    //   scriptContents,
+    //   'text/plain'
+    // );
 
-    return new UpdateContentRequest(this, scriptId, br);
+    return new UpdateContentRequest(this, scriptId, scriptContents);
   }
 
   /*********************************************************************************************************
@@ -143,7 +143,7 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
         COMMAND_CONTENT,
         REQUEST_METHOD_GET,
         null,
-        new ffhttp_JsonDeserializer(Content.class)
+        new ffhttp_JsonDeserializer(MRR_GoogleAppsScriptModelContent.class)
       );
     }
 
@@ -202,7 +202,7 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
     UpdateContentRequest(
       MRR_GoogleAppsScriptProjects projects,
       String scriptId,
-      ffhttp_IHttpContent scriptContents
+      MRR_GoogleAppsScriptModelContent scriptContents
     ) {
       super(
         projects,
@@ -213,7 +213,7 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
         COMMAND_CONTENT,
         REQUEST_METHOD_PUT,
         scriptContents,
-        new ffhttp_JsonDeserializer(Content.class)
+        new ffhttp_JsonDeserializer(MRR_GoogleAppsScriptModelContent.class)
       );
     }
   }
@@ -221,32 +221,6 @@ public with sharing class MRR_GoogleAppsScriptProjects extends MRR_GoogleAppsScr
   /*********************************************************************************************************
    * Inner Classes
    *********************************************************************************************************/
-
-  public class Content {
-    // Instance Variables
-    private String scriptId; // The script project's Drive ID.
-    private MRR_GoogleAppsScriptModelFile[] files; // The list of script project files. One of the files is a script manifest;
-    // it must be named "appsscript", must have type of JSON, and include the manifest configurations for the project.
-
-    /**
-     * Get/Sets
-     */
-    public String getScriptId() {
-      return scriptId;
-    }
-    public Content setScriptId(String scriptId) {
-      this.scriptId = scriptId;
-      return this;
-    }
-
-    public MRR_GoogleAppsScriptModelFile[] getFiles() {
-      return files;
-    }
-    public Content setFiles(MRR_GoogleAppsScriptModelFile[] files) {
-      this.files = files;
-      return this;
-    }
-  }
 
   public class MetricsFilter {
     // Instance Variables

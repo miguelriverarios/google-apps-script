@@ -53,7 +53,9 @@ public with sharing class MRR_GoogleAppsScriptProcesses extends MRR_GoogleAppsSc
         ENDPOINT_PROCESSES,
         REQUEST_METHOD_GET,
         null,
-        new ffhttp_JsonDeserializer(Processes.class)
+        new ffhttp_JsonDeserializer(
+          MRR_GoogleAppsScriptModelListProcesses.class
+        )
       );
     }
 
@@ -95,7 +97,9 @@ public with sharing class MRR_GoogleAppsScriptProcesses extends MRR_GoogleAppsSc
         ENDPOINT_PROCESSES + COMMAND_LIST_PROCESSES,
         REQUEST_METHOD_GET,
         null,
-        new ffhttp_JsonDeserializer(Processes.class)
+        new ffhttp_JsonDeserializer(
+          MRR_GoogleAppsScriptModelListProcesses.class
+        )
       );
     }
 
@@ -140,33 +144,6 @@ public with sharing class MRR_GoogleAppsScriptProcesses extends MRR_GoogleAppsSc
   /*********************************************************************************************************
    * Inner Classes
    *********************************************************************************************************/
-
-  public class Processes {
-    // Instance Variables
-    private MRR_GoogleAppsScriptModelProcess[] processes; // List of processes matching request paramteters
-    private String nextPageToken; // Token for the next page of results. If empty, there are no more pages remaining
-
-    /**
-     * Get/Sets
-     */
-    public MRR_GoogleAppsScriptModelProcess[] getProcesses() {
-      return processes;
-    }
-    public Processes setProcesses(
-      MRR_GoogleAppsScriptModelProcess[] processes
-    ) {
-      this.processes = processes;
-      return this;
-    }
-
-    public String getNextPageToken() {
-      return nextPageToken;
-    }
-    public Processes setNextPageToken(String nextPageToken) {
-      this.nextPageToken = nextPageToken;
-      return this;
-    }
-  }
 
   public class ListUserProcessesFilter {
     // Instance Variables

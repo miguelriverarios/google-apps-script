@@ -119,7 +119,7 @@ public with sharing class MRR_GoogleAppsScriptVersions extends MRR_GoogleAppsScr
         ENDPOINT_VERSIONS,
         REQUEST_METHOD_GET,
         null,
-        new ffhttp_JsonDeserializer(ListRequestVersions.class)
+        new ffhttp_JsonDeserializer(MRR_GoogleAppsScriptModelListVersions.class)
       );
     }
 
@@ -139,37 +139,6 @@ public with sharing class MRR_GoogleAppsScriptVersions extends MRR_GoogleAppsScr
     }
     public ListRequest setPageToken(String pageToken) {
       addParam('pageToken', pageToken);
-      return this;
-    }
-  }
-
-  /*********************************************************************************************************
-   * Inner Classes
-   *********************************************************************************************************/
-
-  public class ListRequestVersions {
-    // Instance Variables
-    private MRR_GoogleAppsScriptModelVersion[] versions; // The list of versions.
-    private String nextPageToken; // The token use to fetch the next page of records. if not exist in the response, that means no more versions to list.
-
-    /**
-     * Get/Sets
-     */
-    public MRR_GoogleAppsScriptModelVersion[] getVersions() {
-      return versions;
-    }
-    public ListRequestVersions setVersions(
-      MRR_GoogleAppsScriptModelVersion[] versions
-    ) {
-      this.versions = versions;
-      return this;
-    }
-
-    public String getNextPageToken() {
-      return nextPageToken;
-    }
-    public ListRequestVersions setNextPageToken(String nextPageToken) {
-      this.nextPageToken = nextPageToken;
       return this;
     }
   }
