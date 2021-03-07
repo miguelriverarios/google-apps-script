@@ -260,4 +260,63 @@ private class MRR_GoogleAppsScriptModelTest {
     );
     System.assertEquals(process.getDuration(), '5', 'Duration does not match');
   }
+  static testMethod void mrr_GoogleAppsScriptModelProject() {
+    //Create all the required sub-classes
+    MRR_GoogleAppsScriptModelUser user = new MRR_GoogleAppsScriptModelUser();
+    user.setDomain('Test')
+      .setEmail('test@gmail.com')
+      .setName('Test')
+      .setPhotoUrl('www.test.com');
+
+    //Create the file class. Chain the set calls so that we can check that we correctly return the file object.
+    MRR_GoogleAppsScriptModelProject project = new MRR_GoogleAppsScriptModelProject();
+    project.setScriptId('123ABC')
+      .setTitle('Test')
+      .setParentId('123ABC')
+      .setCreateTime('2019-10-12T07:20:50.52Z')
+      .setUpdateTime('2019-10-12T07:20:50.52Z')
+      .setCreator(user)
+      .setLastModifyUser(user);
+
+    //Assert that we get the appropriate return values.
+    System.assertEquals(
+      project.getScriptId(),
+      '123ABC',
+      'Script ID does not match'
+    );
+    System.assertEquals(project.getTitle(), 'Test', 'Title does not match');
+    System.assertEquals(
+      project.getParentId(),
+      '123ABC',
+      'Parent ID does not match'
+    );
+    System.assertEquals(
+      project.getCreateTime(),
+      '2019-10-12T07:20:50.52Z',
+      'Create time does not match'
+    );
+    System.assertEquals(
+      project.getUpdateTime(),
+      '2019-10-12T07:20:50.52Z',
+      'Update time does not match'
+    );
+    System.assertEquals(project.getCreator(), user, 'Creator does not match');
+    System.assertEquals(
+      project.getLastModifyUser(),
+      user,
+      'Last modify user does not match'
+    );
+    System.assertEquals(user.getDomain(), 'Test', 'Domain does not match');
+    System.assertEquals(
+      user.getEmail(),
+      'test@gmail.com',
+      'Email does not match'
+    );
+    System.assertEquals(user.getName(), 'Test', 'Name does not match');
+    System.assertEquals(
+      user.getPhotoUrl(),
+      'www.test.com',
+      'Photo URL does not match'
+    );
+  }
 }
