@@ -1,16 +1,24 @@
-# Salesforce DX Project: Next Steps
+# Apex Google Apps Script API Framework
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+## Introduction
 
-## How Do You Plan to Deploy Your Changes?
+An Apex framework has been created to provide functionality for Google Apps Script API callouts. This library is an extenstion of the [Core library](https://github.com/financialforcedev/ffhttp-core) by [FinancialForce for Developers](https://github.com/financialforcedev).
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+This library is meant to be installed as an SFDX Unlocked Package.
 
-## Configure Your Salesforce DX Project
+## Key Features
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+- Apex Google Apps Script API
 
-## Read All About It
+## Installation
+
+TBD
+
+## Reporting Issues & Enhancements
+
+Please report any issues using the github [issues](https://github.com/miguelriverarios/mrr-googleappsscript/issues) feature. Suggestions / bug reports are welcome as are extensions containing additional functionality.
+
+## Additional Resources
 
 - [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
 - [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
