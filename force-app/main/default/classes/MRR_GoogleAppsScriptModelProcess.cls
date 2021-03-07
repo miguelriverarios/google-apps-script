@@ -16,7 +16,7 @@ public with sharing class MRR_GoogleAppsScriptModelProcess extends MRR_GoogleApp
   public String getProjectName() {
     return projectName;
   }
-  public mrr_GoogleAppsScriptModelProcess setProjectName(String projectName) {
+  public MRR_GoogleAppsScriptModelProcess setProjectName(String projectName) {
     this.projectName = projectName;
     return this;
   }
@@ -24,7 +24,7 @@ public with sharing class MRR_GoogleAppsScriptModelProcess extends MRR_GoogleApp
   public String getFunctionName() {
     return functionName;
   }
-  public mrr_GoogleAppsScriptModelProcess setFunctionName(String functionName) {
+  public MRR_GoogleAppsScriptModelProcess setFunctionName(String functionName) {
     this.functionName = functionName;
     return this;
   }
@@ -32,7 +32,7 @@ public with sharing class MRR_GoogleAppsScriptModelProcess extends MRR_GoogleApp
   public ProcessType getProcessType() {
     return processType;
   }
-  public mrr_GoogleAppsScriptModelProcess setProcessType(
+  public MRR_GoogleAppsScriptModelProcess setProcessType(
     ProcessType processType
   ) {
     this.processType = processType;
@@ -42,7 +42,7 @@ public with sharing class MRR_GoogleAppsScriptModelProcess extends MRR_GoogleApp
   public ProcessStatus getProcessStatus() {
     return processStatus;
   }
-  public mrr_GoogleAppsScriptModelProcess setProcessStatus(
+  public MRR_GoogleAppsScriptModelProcess setProcessStatus(
     ProcessStatus processStatus
   ) {
     this.processStatus = processStatus;
@@ -52,7 +52,7 @@ public with sharing class MRR_GoogleAppsScriptModelProcess extends MRR_GoogleApp
   public UserAccessLevel getUserAccessLevel() {
     return userAccessLevel;
   }
-  public mrr_GoogleAppsScriptModelProcess setUserAccessLevel(
+  public MRR_GoogleAppsScriptModelProcess setUserAccessLevel(
     UserAccessLevel userAccessLevel
   ) {
     this.userAccessLevel = userAccessLevel;
@@ -62,7 +62,7 @@ public with sharing class MRR_GoogleAppsScriptModelProcess extends MRR_GoogleApp
   public String getStartTime() {
     return startTime;
   }
-  public mrr_GoogleAppsScriptModelProcess setStartTime(String startTime) {
+  public MRR_GoogleAppsScriptModelProcess setStartTime(String startTime) {
     this.startTime = startTime;
     return this;
   }
@@ -70,7 +70,7 @@ public with sharing class MRR_GoogleAppsScriptModelProcess extends MRR_GoogleApp
   public String getDuration() {
     return duration;
   }
-  public mrr_GoogleAppsScriptModelProcess setDuration(String duration) {
+  public MRR_GoogleAppsScriptModelProcess setDuration(String duration) {
     this.duration = duration;
     return this;
   }
